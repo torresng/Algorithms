@@ -1,0 +1,6 @@
+[package]
+name = "INSERTION_SORT"
+version = "0.1.0"
+authors = ["Torres Ng <torresng2684cte@gmail.com>"]
+
+[dependencies]
