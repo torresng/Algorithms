@@ -1,10 +1,11 @@
 #include <array>
 #include <iostream>
 
-void insert_sort(std::array<int, 6> &arr) {
+template<class T, int N>
+void insert_sort(std::array<T, N> &arr) {
   int j;
   for (j = 1; j < arr.size(); j++) {
-    int key = arr[j];
+    T key = arr[j];
     int i = j - 1;
     while (i >= 0 && arr[i] > key) {
       arr[i + 1] = arr[i];
@@ -16,7 +17,7 @@ void insert_sort(std::array<int, 6> &arr) {
 
 int main(void) {
   std::array<int, 6> arr{5, 2, 4, 6, 1, 3};
-  insert_sort(arr);
+  insert_sort<int, 6>(arr);
 
   for (int elem : arr) {
     std::cout << elem << " ";
