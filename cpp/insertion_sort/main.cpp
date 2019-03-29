@@ -1,8 +1,7 @@
 #include <array>
 #include <iostream>
 
-template<class T, int N>
-void insert_sort(std::array<T, N> &arr) {
+template <class T, int N> void insert_sort(std::array<T, N> &arr) {
   int j;
   for (j = 1; j < arr.size(); j++) {
     T key = arr[j];
@@ -15,14 +14,18 @@ void insert_sort(std::array<T, N> &arr) {
   }
 }
 
-int main(void) {
+void test_case_1() {
   std::array<int, 6> arr{5, 2, 4, 6, 1, 3};
   insert_sort<int, 6>(arr);
+  std::array<int, 6> result{1, 2, 3, 4, 5, 6};
 
-  for (int elem : arr) {
-    std::cout << elem << " ";
+  for(int i = 0; i < arr.size(); i++) {
+  assert(arr[i] == result[i]);
   }
-  std::cout << std::endl;
+}
+
+int main(void) {
+  test_case_1();
 
   return 0;
 }
