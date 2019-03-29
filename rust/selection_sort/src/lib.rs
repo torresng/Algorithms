@@ -1,4 +1,7 @@
-pub fn selection_sort(arr: &mut [i32]) {
+pub fn selection_sort<T>(arr: &mut [T])
+where
+    T: Ord,
+{
     for j in 0..arr.len() - 1 {
         let mut smallest = j;
         for i in j + 1..arr.len() {
