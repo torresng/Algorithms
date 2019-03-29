@@ -2,9 +2,8 @@
 #include <cassert>
 #include <iostream>
 
-using namespace std;
-
-int iterative_binary_search(array<int, 6> &arr, int v, int low, int high) {
+template <class T, int N>
+int iterative_binary_search(std::array<T, N> &arr, int v, int low, int high) {
   while (low <= high) {
     int mid = (low + high) / 2;
     if (v == arr[mid]) {
@@ -18,7 +17,8 @@ int iterative_binary_search(array<int, 6> &arr, int v, int low, int high) {
   return -1;
 }
 
-int recursive_binary_search(array<int, 6> &arr, int v, int low, int high) {
+template <class T, int N>
+int recursive_binary_search(std::array<T, N> &arr, int v, int low, int high) {
   if (low > high) {
     return -1;
   }
@@ -33,24 +33,24 @@ int recursive_binary_search(array<int, 6> &arr, int v, int low, int high) {
 }
 
 void test_case_1() {
-  array<int, 6> arr{1, 2, 3, 4, 5, 6};
-  assert(iterative_binary_search(arr, 3, 0, 5) == 2);
-  assert(iterative_binary_search(arr, 6, 0, 5) == 5);
-  assert(iterative_binary_search(arr, 1, 0, 5) == 0);
-  assert(iterative_binary_search(arr, 8, 0, 5) == -1);
-}
+  std::array<int, 6> arr{1, 2, 3, 4, 5, 6};
+  int result;
 
-void test_case_2() {
-  array<int, 6> arr{1, 2, 3, 4, 5, 6};
-  assert(recursive_binary_search(arr, 3, 0, 5) == 2);
-  assert(recursive_binary_search(arr, 6, 0, 5) == 5);
-  assert(recursive_binary_search(arr, 1, 0, 5) == 0);
-  assert(recursive_binary_search(arr, 8, 0, 5) == -1);
+  result = iterative_binary_search<int, 6>(arr, 3, 0, 5);
+  assert(result == 2);
+
+  result = iterative_binary_search<int, 6>(arr, 6, 0, 5);
+  assert(result == 5);
+
+  result = iterative_binary_search<int, 6>(arr, 1, 0, 5);
+  assert(result == 0);
+
+  result = iterative_binary_search<int, 6>(arr, 8, 0, 5);
+  assert(result == -1);
 }
 
 int main(void) {
   test_case_1();
-  test_case_2();
 
   return 0;
 }
