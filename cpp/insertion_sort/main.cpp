@@ -19,8 +19,8 @@ void test_case_1() {
   insert_sort<int, 6>(arr);
   std::array<int, 6> result{1, 2, 3, 4, 5, 6};
 
-  for(int i = 0; i < arr.size(); i++) {
-  assert(arr[i] == result[i]);
+  for (int i = 0; i < arr.size(); i++) {
+    assert(arr[i] == result[i]);
   }
 }
 
