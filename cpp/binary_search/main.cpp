@@ -1,56 +1,118 @@
-#include <array>
 #include <cassert>
-#include <iostream>
+#include <vector>
 
-template <class T, int N>
-int iterative_binary_search(std::array<T, N> &arr, int v, int low, int high) {
-  while (low <= high) {
-    int mid = (low + high) / 2;
-    if (v == arr[mid]) {
-      return mid;
-    } else if (v > arr[mid]) {
-      low = mid + 1;
-    } else {
-      high = mid - 1;
+using namespace std;
+
+/**
+ * 二分查找，找到該值在數組中的下標，否則為-1
+ */
+int binarySearch(vector<int> &arr, int key) {
+    int left = 0;
+    int right = arr.size() - 1;
+    while (left <= right) {
+        int mid = (left + right) / 2;
+        if (key == arr[mid]) {
+            return mid;
+        } else if (key > arr[mid]) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
     }
-  }
-  return -1;
+    return -1;
 }
 
-template <class T, int N>
-int recursive_binary_search(std::array<T, N> &arr, int v, int low, int high) {
-  if (low > high) {
+// 查找第一个相等的元素
+int findFirstEqual(vector<int> &arr, int key) {
+    int left = 0;
+    int right = arr.size() - 1;
+    while (left <= right) {
+        int mid = (left + right) / 2;
+        if (arr[mid] >= key) {
+            right = mid - 1;
+        } else {
+            left = mid + 1;
+        }
+    }
+    if (left < arr.size() && arr[left] == key) {
+        return left;
+    }
     return -1;
-  }
-  int mid = (low + high) / 2;
-  if (v == arr[mid]) {
-    return mid;
-  } else if (v > arr[mid]) {
-    return recursive_binary_search(arr, v, mid + 1, high);
-  } else {
-    return recursive_binary_search(arr, v, low, mid - 1);
-  }
+}
+
+// 查找最后一个相等的元素
+int findLastEqual(vector<int> &arr, int key) {
+    int left = 0;
+    int right = arr.size() - 1;
+    while (left <= right) {
+        int mid = (left + right) / 2;
+        if (arr[mid] <= key) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    if (right >= 0 && arr[right] == key) {
+        return right;
+    }
+    return -1;
 }
 
 void test_case_1() {
-  std::array<int, 6> arr{1, 2, 3, 4, 5, 6};
-  int result;
+    vector<int> arr{1, 2, 3, 4, 5, 6};
+    int result;
 
-  result = iterative_binary_search<int, 6>(arr, 3, 0, 5);
-  assert(result == 2);
+    result = binarySearch(arr, 3);
+    assert(result == 2);
 
-  result = iterative_binary_search<int, 6>(arr, 6, 0, 5);
-  assert(result == 5);
+    result = binarySearch(arr, 6);
+    assert(result == 5);
 
-  result = iterative_binary_search<int, 6>(arr, 1, 0, 5);
-  assert(result == 0);
+    result = binarySearch(arr, 5);
+    assert(result == 4);
 
-  result = iterative_binary_search<int, 6>(arr, 8, 0, 5);
-  assert(result == -1);
+    result = binarySearch(arr, 7);
+    assert(result == -1);
+}
+
+void test_case_2() {
+    vector<int> arr{1, 1, 2, 2, 2, 5, 5, 6};
+    int result;
+
+    result = findFirstEqual(arr, 1);
+    assert(result == 0);
+
+    result = findFirstEqual(arr, 6);
+    assert(result == 7);
+
+    result = findFirstEqual(arr, 5);
+    assert(result == 5);
+
+    result = findFirstEqual(arr, 7);
+    assert(result == -1);
+}
+
+void test_case_3() {
+    vector<int> arr{1, 1, 2, 2, 2, 5, 5, 6};
+    int result;
+
+    result = findLastEqual(arr, 1);
+    assert(result == 1);
+
+    result = findLastEqual(arr, 6);
+    assert(result == 7);
+
+    result = findLastEqual(arr, 5);
+    assert(result == 6);
+
+    result = findLastEqual(arr, 7);
+    assert(result == -1);
 }
 
 int main(void) {
-  test_case_1();
+    test_case_1();
+    test_case_2();
+    test_case_3();
 
-  return 0;
+    return 0;
 }
