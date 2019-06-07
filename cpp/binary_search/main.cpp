@@ -11,12 +11,12 @@ int binarySearch(vector<int> &arr, int key) {
     int right = arr.size() - 1;
     while (left <= right) {
         int mid = (left + right) / 2;
-        if (key == arr[mid]) {
+        if (arr[mid] == key) {
             return mid;
-        } else if (key > arr[mid]) {
-            left = mid + 1;
-        } else {
+        } else if (arr[mid] > key) {
             right = mid - 1;
+        } else {
+            left = mid + 1;
         }
     }
     return -1;
@@ -39,7 +39,7 @@ void test_case_1() {
     assert(result == -1);
 }
 
-// 查找第一个相等的元素
+// 查找第一个與key相等的元素
 int findFirstEqual(vector<int> &arr, int key) {
     int left = 0;
     int right = arr.size() - 1;
@@ -74,16 +74,16 @@ void test_case_2() {
     assert(result == -1);
 }
 
-// 查找最后一个相等的元素
+// 查找最后一个與key相等的元素
 int findLastEqual(vector<int> &arr, int key) {
     int left = 0;
     int right = arr.size() - 1;
     while (left <= right) {
         int mid = (left + right) / 2;
-        if (arr[mid] <= key) {
-            left = mid + 1;
-        } else {
+        if (arr[mid] > key) {
             right = mid - 1;
+        } else {
+            left = mid + 1;
         }
     }
     if (right >= 0 && arr[right] == key) {
@@ -115,7 +115,7 @@ int findLastEqualSmaller(vector<int> &arr, int key) {
     int right = arr.size() - 1;
     while (left <= right) {
         int mid = (left + right) / 2;
-        if (key < arr[mid]) {
+        if (arr[mid] > key) {
             right = mid - 1;
         } else {
             left = mid + 1;
@@ -183,9 +183,9 @@ void test_case_5() {
 int findFirstEqualLarger(vector<int> &arr, int key) {
     int left = 0;
     int right = arr.size() - 1;
-    while(left <= right) {
+    while (left <= right) {
         int mid = (left + right) / 2;
-        if(arr[mid] >= key) {
+        if (arr[mid] >= key) {
             right = mid - 1;
         } else {
             left = mid + 1;
@@ -218,9 +218,9 @@ void test_case_6() {
 int findFirstLarger(vector<int> &arr, int key) {
     int left = 0;
     int right = arr.size() - 1;
-    while(left <= right) {
+    while (left <= right) {
         int mid = (left + right) / 2;
-        if(arr[mid] > key) {
+        if (arr[mid] > key) {
             right = mid - 1;
         } else {
             left = mid + 1;
@@ -248,6 +248,19 @@ void test_case_7() {
     result = findFirstLarger(arr, 4);
     assert(result == 5);
 }
+
+// 二分查找變種總結
+/*
+while(left <= right) {
+    int mid = (left + right) / 2;
+    if(arr[mid] ? key) {
+        //... right = mid - 1;
+    } else {
+        //... left = mid + 1;
+    }
+}
+return xxx;
+*/
 
 int main(void) {
     test_case_1();
