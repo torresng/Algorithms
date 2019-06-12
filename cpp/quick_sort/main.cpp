@@ -5,42 +5,44 @@ using namespace std;
 
 const int N = 1000010;
 
-int q[N];
+int arr[N];
 
-void quick_sort(int q[], int l, int r) {
+void quick_sort(int arr[], int l, int r) {
     if (l >= r) {
         return;
     }
 
-    int i = l - 1, j = r + 1, x = q[(l + r) >> 1];
+    int i = l - 1, j = r + 1, x = arr[(l + r) >> 1];
 
     while (i < j) {
         do {
-            i++;
-        } while (q[i] < x);
+            ++i;
+        } while (arr[i] < x);
         do {
-            j--;
-        } while (q[j] > x);
-        if (i < j)
-            swap(q[i], q[j]);
+            --j;
+        } while (arr[j] > x);
+        if (i < j) {
+            swap(arr[i], arr[j]);
+        }
     }
 
-    quick_sort(q, l, j);
-    quick_sort(q, j + 1, r);
+    quick_sort(arr, l, j);
+    quick_sort(arr, j + 1, r);
 }
 
 int main(void) {
     int n;
     scanf("%d", &n);
-    cout << n << endl;
 
-    for (int i = 0; i < n; i++)
-        scanf("%d", &q[i]);
+    for (int i = 0; i < n; ++i) {
+        scanf("%d", &arr[i]);
+    }
 
-    quick_sort(q, 0, n - 1);
+    quick_sort(arr, 0, n - 1);
 
-    for (int i = 0; i < n; i++)
-        printf("%d ", q[i]);
+    for (int i = 0; i < n; ++i) {
+        printf("%d", arr[i]);
+    }
 
     return 0;
 }
