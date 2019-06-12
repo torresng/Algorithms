@@ -1,5 +1,4 @@
 #include <cstdio>
-#include <iostream>
 
 using namespace std;
 
@@ -24,7 +23,6 @@ void merge_sort(int arr[], int l, int r) {
             tmp[k++] = arr[j++];
         }
     }
-
     while (i <= mid) {
         tmp[k++] = arr[i++];
     }
@@ -32,7 +30,7 @@ void merge_sort(int arr[], int l, int r) {
         tmp[k++] = arr[j++];
     }
 
-    for (i = l, j = 0; i <= r; i++, j++) {
+    for (i = l, j = 0; i <= r; ++i, ++j) {
         arr[i] = tmp[j];
     }
 }
@@ -50,4 +48,6 @@ int main(void) {
     for (int i = 0; i < n; ++i) {
         printf("%d ", arr[i]);
     }
+
+    return 0;
 }
