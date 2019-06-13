@@ -1,7 +1,6 @@
 #include <cstdio>
-#include <iostream>
 
-const int N = 10e7 + 10;
+const int N = 1e6 + 10;
 
 int arr[N], tmp[N];
 
@@ -11,7 +10,6 @@ void merge_sort(int arr[], int l, int r) {
     }
 
     int mid = (l + r) >> 1;
-
     merge_sort(arr, l, mid), merge_sort(arr, mid + 1, r);
 
     int i = l, j = mid + 1, k = 0;
@@ -22,6 +20,7 @@ void merge_sort(int arr[], int l, int r) {
             tmp[k++] = arr[j++];
         }
     }
+
     while (i <= mid) {
         tmp[k++] = arr[i++];
     }
