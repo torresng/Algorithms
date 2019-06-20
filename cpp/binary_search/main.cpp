@@ -1,4 +1,5 @@
 #include <cassert>
+#include <iostream>
 #include <vector>
 
 using namespace std;
@@ -39,7 +40,10 @@ void test_case_1() {
     assert(result == -1);
 }
 
-// 查找第一个與key相等的元素
+/*
+ * 查找第一个與key相等的元素，否則為-1
+ */
+// ver 1 (下面模板)
 int findFirstEqual(vector<int> &arr, int key) {
     int left = 0;
     int right = arr.size() - 1;
@@ -47,6 +51,24 @@ int findFirstEqual(vector<int> &arr, int key) {
         int mid = (left + right) / 2;
         if (arr[mid] >= key) {
             right = mid - 1;
+        } else {
+            left = mid + 1;
+        }
+    }
+    if (left < arr.size() && arr[left] == key) {
+        return left;
+    }
+    return -1;
+}
+
+// ver 2（README.md模板）
+int findFirstEqual2(vector<int> &arr, int key) {
+    int left = 0;
+    int right = arr.size() - 1;
+    while (left < right) {
+        int mid = (left + right) >> 1;
+        if (arr[mid] >= key) {
+            right = mid;
         } else {
             left = mid + 1;
         }
@@ -74,7 +96,10 @@ void test_case_2() {
     assert(result == -1);
 }
 
-// 查找最后一个與key相等的元素
+/*
+ * 查找最后一个與key相等的元素，否則為-1
+ */
+// ver 1 (下面模板)
 int findLastEqual(vector<int> &arr, int key) {
     int left = 0;
     int right = arr.size() - 1;
@@ -88,6 +113,24 @@ int findLastEqual(vector<int> &arr, int key) {
     }
     if (right >= 0 && arr[right] == key) {
         return right;
+    }
+    return -1;
+}
+
+// ver 2（README.md模板）
+int findLastEqual2(vector<int> &arr, int key) {
+    int left = 0;
+    int right = arr.size() - 1;
+    while (left < right) {
+        int mid = (left + right + 1) >> 1;
+        if (arr[mid] <= key) {
+            left = mid;
+        } else {
+            right = mid - 1;
+        }
+    }
+    if (right >= 0 && arr[left] == key) {
+        return left;
     }
     return -1;
 }
@@ -109,7 +152,10 @@ void test_case_3() {
     assert(result == -1);
 }
 
-// 查找最後一個等於或者小於key的元素
+/*
+ * 查找最後一個等於或者小於key的元素
+ */
+// ver 1 (下面模板)
 int findLastEqualSmaller(vector<int> &arr, int key) {
     int left = 0;
     int right = arr.size() - 1;
@@ -122,6 +168,21 @@ int findLastEqualSmaller(vector<int> &arr, int key) {
         }
     }
     return right;
+}
+
+// ver 2（README.md模板）
+int findLastEqualSmaller2(vector<int> &arr, int key) {
+    int left = 0;
+    int right = arr.size() - 1;
+    while (left < right) {
+        int mid = (left + right + 1) >> 1;
+        if (arr[mid] <= key) {
+            left = mid;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return left;
 }
 
 void test_case_4() {
@@ -144,7 +205,10 @@ void test_case_4() {
     assert(result == 4);
 }
 
-// 查找最後一個小於key的元素
+/*
+ * 查找最後一個小於key的元素
+ */
+// ver 1 (下面模板)
 int findLastSmaller(vector<int> &arr, int key) {
     int left = 0;
     int right = arr.size() - 1;
@@ -152,6 +216,21 @@ int findLastSmaller(vector<int> &arr, int key) {
         int mid = (left + right) / 2;
         if (arr[mid] >= key) {
             right = mid - 1;
+        } else {
+            left = mid + 1;
+        }
+    }
+    return right;
+}
+
+// ver 2（README.md模板）*
+int findLastSmaller2(vector<int> &arr, int key) {
+    int left = 0;
+    int right = arr.size() - 1;
+    while (left <= right) { // *
+        int mid = (left + right) >> 1;
+        if (arr[mid] >= key) {
+            right = mid - 1; // *
         } else {
             left = mid + 1;
         }
@@ -179,7 +258,10 @@ void test_case_5() {
     assert(result == 4);
 }
 
-// 查找第一個等於或者大於key的元素
+/*
+ * 查找第一個等於或者大於key的元素
+ */
+// ver 1 (下面模板)
 int findFirstEqualLarger(vector<int> &arr, int key) {
     int left = 0;
     int right = arr.size() - 1;
@@ -192,6 +274,28 @@ int findFirstEqualLarger(vector<int> &arr, int key) {
         }
     }
     return left;
+}
+
+// ver 2（README.md模板）*
+int findFirstEqualLarger2(vector<int> &arr, int key) {
+    int left = 0;
+    int right = arr.size() - 1;
+    while (left < right) {
+        int mid = (left + right) >> 1;
+        if (arr[mid] >= key) {
+            right = mid;
+        } else {
+            left = mid + 1;
+        }
+    }
+    // *
+    if (arr[right] == key) {
+        return right;
+    }
+    if (arr[right] > key) {
+        return right;
+    }
+    return right + 1;
 }
 
 void test_case_6() {
@@ -214,7 +318,10 @@ void test_case_6() {
     assert(result == 5);
 }
 
-// 查找第一個大於key的元素
+/*
+ * 查找第一個大於key的元素
+ */
+// ver 1 (下面模板)
 int findFirstLarger(vector<int> &arr, int key) {
     int left = 0;
     int right = arr.size() - 1;
@@ -227,6 +334,21 @@ int findFirstLarger(vector<int> &arr, int key) {
         }
     }
     return left;
+}
+
+// ver 2（README.md模板）*
+int findFirstLarger2(vector<int> &arr, int key) {
+    int left = 0;
+    int right = arr.size() - 1;
+    while (left < right) {
+        int mid = (left + right + 1) >> 1;
+        if (arr[mid] <= key) {
+            left = mid;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return left + 1;
 }
 
 void test_case_7() {
@@ -248,19 +370,6 @@ void test_case_7() {
     result = findFirstLarger(arr, 4);
     assert(result == 5);
 }
-
-// 二分查找變種總結
-/*
-while(left <= right) {
-    int mid = (left + right) / 2;
-    if(arr[mid] ? key) {
-        //... right = mid - 1;
-    } else {
-        //... left = mid + 1;
-    }
-}
-return xxx;
-*/
 
 int main(void) {
     test_case_1();
