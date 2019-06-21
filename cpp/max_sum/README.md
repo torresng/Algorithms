@@ -27,3 +27,9 @@ curSum - (curSum - k + 1) = curSum - curSum + k - 1 = k - 1
 ```
 
 所以算法用 lower_bound 方法找出等於或第一個大於(curSum - k)的值
+
+```cpp
+// Returns an iterator pointing to the first element in the container which is not 
+// considered to go before val (i.e., either it is equivalent or goes after).
+std::set::lower_bound
+```
