@@ -12,7 +12,7 @@ vector<int> add(vector<int> &A, vector<int> &B) {
     vector<int> C;
 
     int t = 0;
-    for (int i = 0; i < A.size(); ++i) {
+    for (unsigned i = 0; i < A.size(); ++i) {
         t += A[i];
         if (i < B.size()) {
             t += B[i];
