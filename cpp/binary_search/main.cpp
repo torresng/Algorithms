@@ -262,7 +262,7 @@ void test_case_5() {
  * 查找第一個等於或者大於key的元素
  */
 // ver 1 (下面模板)
-int findFirstEqualLarger(vector<int> &arr, int key) {
+int findFirstEqualLarger2(vector<int> &arr, int key) {
     int left = 0;
     int right = arr.size() - 1;
     while (left <= right) {
@@ -277,7 +277,7 @@ int findFirstEqualLarger(vector<int> &arr, int key) {
 }
 
 // ver 2（README.md模板）*
-int findFirstEqualLarger2(vector<int> &arr, int key) {
+int findFirstEqualLarger(vector<int> &arr, int key) {
     int left = 0;
     int right = arr.size() - 1;
     while (left < right) {
@@ -289,10 +289,7 @@ int findFirstEqualLarger2(vector<int> &arr, int key) {
         }
     }
     // *
-    if (arr[right] == key) {
-        return right;
-    }
-    if (arr[right] > key) {
+    if (arr[right] >= key) {
         return right;
     }
     return right + 1;
@@ -316,6 +313,10 @@ void test_case_6() {
 
     result = findFirstEqualLarger(arr, 4);
     assert(result == 5);
+
+    vector<int> arr2{1};
+    result = findFirstEqualLarger(arr2, 2);
+    assert(result == 1);
 }
 
 /*
