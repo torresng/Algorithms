@@ -9,7 +9,7 @@ int stk[N], tt;
 
 int main() {
     int n;
-    cin >> n;
+    scanf("%d", &n);
     for (int i = 0; i < n; i++) {
         int x;
         cin >> x;
@@ -17,13 +17,12 @@ int main() {
             tt--;
         }
         if (tt) {
-            cout << stk[tt] << ' ';
+            printf("%d ", stk[tt]);
         } else {
-            cout << "-1 ";
+            printf("-1 ");
         }
         stk[++tt] = x;
     }
-    cout << endl;
 
     return 0;
 }
