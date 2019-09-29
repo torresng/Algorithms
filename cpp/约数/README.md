@@ -44,3 +44,12 @@ vector<int> get_divisors(int x)
 约数个数： (c1 + 1) * (c2 + 1) * ... * (ck + 1)
 约数之和： (p1^0 + p1^1 + ... + p1^c1) * ... * (pk^0 + pk^1 + ... + pk^ck)
 ```
+
+7. 欧几里得算法
+
+```cpp
+int gcd(int a, int b)
+{
+    return b ? gcd(b, a % b) : a;
+}
+```
