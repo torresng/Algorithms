@@ -16,6 +16,8 @@ return xxx;
 
 ## 模板 2
 
+# AcWing
+
 ### 版本 1
 
 當我們將區間[l, r]划分成[l, mid]和[mid + 1, r]時，
