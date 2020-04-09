@@ -10,14 +10,13 @@ void quick_sort(int arr[], int l, int r) {
     if (l == r) {
         return;
     }
-
     int i = l - 1, j = r + 1, x = arr[(l + r) >> 1];
     while (i < j) {
         do {
-            ++i;
+            i++;
         } while (arr[i] < x);
         do {
-            --j;
+            j--;
         } while (arr[j] > x);
         if (i < j) {
             swap(arr[i], arr[j]);
